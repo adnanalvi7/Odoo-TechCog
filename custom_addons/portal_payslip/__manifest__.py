@@ -15,8 +15,6 @@
         'portal_payslip/static/src/css/style.css',
     ],
     },
-    'web.controllers': [
-    'controllers/portal_payslip.py',
-    ],
+
     'installable': True,
 }

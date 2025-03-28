@@ -71,13 +71,13 @@ class PortalAttendance {
             await this.loadPlusCodeLibrary();
         }
 
-        let lat = position.coords.latitude;
-        let long = position.coords.longitude;
+        const lat = position.coords.latitude;
+        const long = position.coords.longitude;
 
         console.log(`✅ Using Coordinates: Latitude: ${lat}, Longitude: ${long}`);
 
         // Generate Full Plus Code (GLOBAL)
-        let plusCode = OpenLocationCode.encode(lat, long);
+        const plusCode = OpenLocationCode.encode(lat, long);
         console.log(`📍 Generated Full Plus Code: ${plusCode}`);
         alert(`Your location code: ${plusCode} Please verify your location code on google maps.`);
 
