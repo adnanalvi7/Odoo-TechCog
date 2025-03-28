@@ -52,7 +52,6 @@
         ],
     },
     'installable': True,
-    'application': False,
     
 }
 
