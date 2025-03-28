@@ -1,0 +1,6 @@
+@media (max-width: 990px) {
+    #wrapwrap .table-responsive > table.table{
+        width: max-content;
+        table-layout: auto;
+    }
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="portal_my_home_payslips" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[@class='o_portal_docs row g-2']" position="before">
+            <div class="o_portal_category row mt-3 " style=" padding-right: calc(var(--gutter-x)* .5); padding-left: calc(var(--gutter-x)* .5);">
+                <a t-att-href="'/my/payslips'" class="d-flex align-items-start p-3 rounded text-decoration-none"
+                    style="width: 49%; background-color: #F8F9FA; transition: background-color 0.2s ease-in-out;"
+                    onmouseover="this.style.backgroundColor='#dae0e5';" 
+                    onmouseout="this.style.backgroundColor='#F8F9FA';">
+                    <img src="/account/static/src/img/Bill.svg" alt="Payslips" class="me-3" width="64" height="64"/>
+                    <div>
+                        <h5 class="mt-0 mb-1 fs-5 fw-normal" style="color:black;">Your Payslips</h5>
+                        <p class="mb-0 opacity-75" style="color: #212529;">View and download your payslips</p>
+                    </div>
+                </a>
+            </div>
+        </xpath>
+    </template>
+</odoo>
