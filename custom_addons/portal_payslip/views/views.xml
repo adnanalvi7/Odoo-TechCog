@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-    <template id="portal_breadcrumbs_inherit" inherit_id="portal.portal_breadcrumbs">
-        <xpath expr="//ol" position="inside">
-            <li t-if="request.httprequest.path == '/my/payslips'" class="breadcrumb-item" style='color: #212529bf;'>Payslips</li>
-        </xpath>
-    </template>
-</odoo>
