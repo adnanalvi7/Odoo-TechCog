@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <template id="portal_my_home_payslips" inherit_id="portal.portal_my_home">
-        <xpath expr="//div[@class='o_portal_docs row g-2']" position="before">
+        <xpath expr="//div[hasclass('o_portal_docs') and hasclass('row') and hasclass('g-2')]" position="before">
             <div class="o_portal_category row mt-3 " style=" padding-right: calc(var(--gutter-x)* .5); padding-left: calc(var(--gutter-x)* .5);">
                 <a t-att-href="'/my/payslips'" class="d-flex align-items-start p-3 rounded text-decoration-none"
                     style="width: 49%; background-color: #F8F9FA; transition: background-color 0.2s ease-in-out;"
