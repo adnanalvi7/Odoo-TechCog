@@ -2,7 +2,7 @@
     'name': 'Portal Payslip',
     'summary': 'Allow portal users to view their payslips',
     'version': '1.0',
-    'depends': ['base','portal', 'hr_payroll', 'hr_contract', 'hr_holidays' , 'web'],
+    'depends': ['base','portal', 'hr_payroll', 'hr_contract', 'hr_holidays' , 'web' , 'hr_timesheet'],
     'license': 'LGPL-3',
     'data': [
         'views/portal_payslip_templates.xml',
