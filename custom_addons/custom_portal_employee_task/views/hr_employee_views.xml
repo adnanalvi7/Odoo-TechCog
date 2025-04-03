@@ -1,16 +1,12 @@
 <odoo>
-    <record id="view_hr_employee_form_inherit" model="ir.ui.view">
-        <field name="name">hr.employee.form.inherit</field>
+    <!-- This goes in views/hr_timesheet_inherit.xml -->
+    <record id="view_hr_employee_form_inherit_timesheet_access" model="ir.ui.view">
+        <field name="name">hr.employee.form.timesheet.access.fix</field>
         <field name="model">hr.employee</field>
-        <field name="inherit_id" ref="hr_timesheet.hr_employee_view_form_inherit_timesheet"/>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
-            <!-- Fix first warning -->
+            <!-- Fix for has_timesheet button -->
             <xpath expr="//button[@name='action_timesheet_from_employee']" position="attributes">
-                <attribute name="groups">hr.group_hr_user,hr_timesheet.group_hr_timesheet_user</attribute>
-            </xpath>
-            
-            <!-- Fix second warning -->
-            <xpath expr="//widget[@name='contract_warning_tooltip']" position="attributes">
                 <attribute name="groups">hr.group_hr_user</attribute>
             </xpath>
         </field>
