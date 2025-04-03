@@ -4,7 +4,7 @@
     'category': 'Project',
     'summary': 'Allow portal users to be assigned as employees and receive login credentials',
     'author': 'Fazeel Malik',
-    'depends': ['hr_contract','project', 'hr', 'portal' ],
+    'depends': ['base','hr_contract','project', 'hr', 'portal' ],
     'license': 'LGPL-3',
     'data': [
         'security/ir.model.access.csv',

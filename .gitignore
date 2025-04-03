@@ -53,8 +53,6 @@ package.json
 # Virtual environment directory (Python)
 venv/
 
-# Odoo log files
-odoo.log
 
 
 addons/*
