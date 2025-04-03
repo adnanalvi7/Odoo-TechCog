@@ -7,7 +7,7 @@
     'depends': ['base','hr_contract','project', 'hr', 'portal' ],
     'license': 'LGPL-3',
     'data': [
-        'security/ir.model.access.csv',
+        'security/ir.model.access.xml',
         'views/employee_view.xml',
         'views/project_task_view.xml',
         
