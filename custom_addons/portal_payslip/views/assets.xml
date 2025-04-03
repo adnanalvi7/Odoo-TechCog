@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-    <template id="assets_frontend" name="Portal Payslip Assets">
-        <link rel="stylesheet" type="text/css" href="/portal_payslip/static/src/css/style.css"/>
-    </template>
-</odoo>
