@@ -1,0 +1,18 @@
+<odoo>
+    <record id="view_hr_employee_form_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.form.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr_timesheet.hr_employee_view_form_inherit_timesheet"/>
+        <field name="arch" type="xml">
+            <!-- Fix first warning -->
+            <xpath expr="//button[@name='action_timesheet_from_employee']" position="attributes">
+                <attribute name="groups">hr.group_hr_user,hr_timesheet.group_hr_timesheet_user</attribute>
+            </xpath>
+            
+            <!-- Fix second warning -->
+            <xpath expr="//widget[@name='contract_warning_tooltip']" position="attributes">
+                <attribute name="groups">hr.group_hr_user</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

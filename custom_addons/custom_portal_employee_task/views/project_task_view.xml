@@ -12,36 +12,14 @@
     </record>
 </odoo> -->
 
-<!-- <odoo>
-    <record id="view_task_form_inherit" model="ir.ui.view">
-        <field name="name">project.task.form.inherit</field>
-        <field name="model">project.task</field>
-        <field name="inherit_id" ref="project.view_task_form2"/>  
-        <field name="arch" type="xml">
-            <xpath expr="//field[@name='user_ids']" position="attributes">
-                <attribute name="domain">[('share', 'in', [True, False])]</attribute>
-            </xpath>
-        </field>
-    </record>
-</odoo> -->
-
 <odoo>
     <record id="view_task_form_inherit" model="ir.ui.view">
         <field name="name">project.task.form.inherit</field>
         <field name="model">project.task</field>
         <field name="inherit_id" ref="project.view_task_form2"/>  
         <field name="arch" type="xml">
-            <!-- Modify the user_ids domain to include portal and internal users -->
             <xpath expr="//field[@name='user_ids']" position="attributes">
                 <attribute name="domain">[('share', 'in', [True, False])]</attribute>
-            </xpath>
-            <!-- Ensure the button is only shown if the user has access to has_timesheet -->
-            <xpath expr="//button[@name='action_timesheet_from_employee']" position="attributes">
-                <attribute name="invisible">not has_timesheet</attribute>
-            </xpath>
-            <!-- Ensure the widget is only shown if the user has access to calendar_mismatch -->
-            <xpath expr="//widget[@name='contract_warning_tooltip']" position="attributes">
-                <attribute name="invisible">not calendar_mismatch</attribute>
             </xpath>
         </field>
     </record>
