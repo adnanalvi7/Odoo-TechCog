@@ -36,7 +36,7 @@ class Employee(models.Model):
         # if not vals.get('work_email'):
         #     raise ValueError("Work Email is required to create a user.")
             # 🔹 Skip email validation in test mode to prevent Odoo test failures
-        if not vals.get('work_email') and not self.env.context.get('test_mode'):
+        if not self.env.context.get('test_mode') and not self.env.context.get('install_mode') and not vals.get('work_email'):
             raise ValueError("Work Email is required to create a user.")
 
         employee = super(Employee, self).create(vals)

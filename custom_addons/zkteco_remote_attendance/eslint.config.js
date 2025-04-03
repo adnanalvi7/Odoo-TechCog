@@ -2,7 +2,7 @@ export default [
   {
     files: ["**/*.js"],
     languageOptions: {
-      ecmaVersion: "latest",
+      ecmaVersion: "2024",
       sourceType: "module",
       globals: {
         odoo: "readonly",
