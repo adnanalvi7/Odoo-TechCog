@@ -1,39 +1,3 @@
-# from odoo import models, fields, api
-
-# class ProjectTask(models.Model):
-#     _inherit = "project.task"
-#     employee_id = fields.Many2one('hr.employee', string="Assigned Employee")
-#     @api.model
-#     def _get_user_domain(self):
-#         return "[('|', ('share', '=', True), ('groups_id', 'in', [ref('base.group_user')]))]"
-
-#     user_id = fields.Many2one(
-#         'res.users', 
-#         string='Assigned To', 
-#         domain=_get_user_domain,  
-#         help="Assign this task to an internal user or a portal user."
-#     )
-
-
-
-# from odoo import models, fields, api
-
-# class ProjectTask(models.Model):
-#     _inherit = "project.task"
-
-#     @api.model
-#     def _get_user_domain(self):
-#         """Allow both internal users and portal users in the Assignees field"""
-#         return "[('share', '=', False), ('groups_id', 'in', [ref('base.group_user')]), ('share', '=', True)]"
-
-#     user_id = fields.Many2one(
-#         'res.users',
-#         string='Assigned To',
-#         domain=_get_user_domain,
-#         help="Assign this task to an internal user or a portal user."
-#     )
-
-
 from odoo import models, fields, api
 
 class ProjectTask(models.Model):

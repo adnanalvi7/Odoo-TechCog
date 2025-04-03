@@ -28,28 +28,48 @@ class Employee(models.Model):
             if user.partner_id and not self.address_id:
                 self.address_id = user.partner_id  
 
-    @api.model
-    def create(self, vals):
+    # @api.model
+    # def create(self, vals):
+    #     """ Override create method to create a portal user and prevent duplicate contacts """
+        
+    #     # 🔹 Ensure work email is assigned before saving
+    #     # if not vals.get('work_email'):
+    #     #     raise ValueError("Work Email is required to create a user.")
+    #         # 🔹 Skip email validation in test mode to prevent Odoo test failures
+    #     if not self.env.context.get('test_mode') and not self.env.context.get('install_mode') and not vals.get('work_email'):
+    #         raise ValueError("Work Email is required to create a user.")
+
+    #     employee = super(Employee, self).create(vals)
+
+    #     # 🔹 Create the user only if not already assigned
+    #     if not employee.user_id:
+    #         employee.create_user_for_employee()
+
+    #     # 🔹 Ensure employee and user share the same contact (Prevents duplicate contacts)
+    #     if employee.user_id and not employee.address_id:
+    #         employee.address_id = employee.user_id.partner_id  
+
+    #     return employee
+    @api.model_create_multi
+    def create(self, vals_list):
         """ Override create method to create a portal user and prevent duplicate contacts """
         
-        # 🔹 Ensure work email is assigned before saving
-        # if not vals.get('work_email'):
-        #     raise ValueError("Work Email is required to create a user.")
-            # 🔹 Skip email validation in test mode to prevent Odoo test failures
-        if not self.env.context.get('test_mode') and not self.env.context.get('install_mode') and not vals.get('work_email'):
-            raise ValueError("Work Email is required to create a user.")
+        for vals in vals_list:
+            if not self.env.context.get('test_mode') and not self.env.context.get('install_mode') and not vals.get('work_email'):
+                raise ValueError("Work Email is required to create a user.")
 
-        employee = super(Employee, self).create(vals)
+        employees = super(Employee, self).create(vals_list)
 
-        # 🔹 Create the user only if not already assigned
-        if not employee.user_id:
-            employee.create_user_for_employee()
+        for employee in employees:
+            # 🔹 Create the user only if not already assigned
+            if not employee.user_id:
+                employee.create_user_for_employee()
 
-        # 🔹 Ensure employee and user share the same contact (Prevents duplicate contacts)
-        if employee.user_id and not employee.address_id:
-            employee.address_id = employee.user_id.partner_id  
+            # 🔹 Ensure employee and user share the same contact (Prevents duplicate contacts)
+            if employee.user_id and not employee.address_id:
+                employee.address_id = employee.user_id.partner_id  
 
-        return employee
+        return employees
 
 
     def write(self, vals):
