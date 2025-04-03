@@ -10,8 +10,6 @@
         'security/ir_model_access.xml',
         'views/employee_view.xml',
         'views/project_task_view.xml',
-        'security/hr_timesheet_security.xml',
-        'views/hr_employee_views.xml',
         
     ],
     'installable': True,
