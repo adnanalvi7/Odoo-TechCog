@@ -105,7 +105,7 @@ class RegisterEmployeeInBiometric(models.Model):
 
         ip_address = '192.168.1.201'
         port = 4370
-        zk = ZK(ip_address, port=port, timeout=10)
+        zk = ZK(ip_address, port=port, timeout=10, omit_ping=True)
 
         try:
             conn = zk.connect()
