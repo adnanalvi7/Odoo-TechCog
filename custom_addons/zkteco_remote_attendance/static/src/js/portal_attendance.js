@@ -25,7 +25,6 @@ class PortalAttendance {
             const script = document.createElement("script");
             script.src = "https://cdnjs.cloudflare.com/ajax/libs/openlocationcode/1.0.3/openlocationcode.min.js"; // Correct URL
             script.onload = () => {
-                console.log(" Plus Code library loaded successfully.");
                 if (window.OpenLocationCode) {
                     this.libraryLoaded = true;
                     resolve();
@@ -52,7 +51,7 @@ class PortalAttendance {
         navigator.geolocation.getCurrentPosition(
             async (position) => {
                 // console.log("High Accuracy:", position),
-                    console.log(`✅ GPS Coordinates: Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`);
+                //   console.log(`✅ GPS Coordinates: Latitude: ${position.coords.latitude}, Longitude: ${position.coords.longitude}`);
                 await this._onSuccess(position);
             },
             (error) => this._onError(error),
@@ -74,11 +73,11 @@ class PortalAttendance {
         const lat = position.coords.latitude;
         const long = position.coords.longitude;
 
-        console.log(`✅ Using Coordinates: Latitude: ${lat}, Longitude: ${long}`);
+        //console.log(`✅ Using Coordinates: Latitude: ${lat}, Longitude: ${long}`);
 
         // Generate Full Plus Code (GLOBAL)
         const plusCode = OpenLocationCode.encode(lat, long);
-        console.log(`📍 Generated Full Plus Code: ${plusCode}`);
+        //console.log(`📍 Generated Full Plus Code: ${plusCode}`);
         alert(`Your location code: ${plusCode} Please verify your location code on google maps.`);
 
         // Send coordinates to check if within range
@@ -93,9 +92,9 @@ class PortalAttendance {
             });
 
             if (response.success) {
-                console.log("✅ Attendance marked successfully.");
+                alert("✅ Attendance marked successfully.");
             } else {
-                console.log("❌ Attendance not marked: ", response.message);
+                alert("❌ Attendance not marked: ", response.message);
             }
         } catch (error) {
             console.error("🚨 Error checking location range:", error);
@@ -104,7 +103,7 @@ class PortalAttendance {
 
 
     _onError(error) {
-        console.error("🚨 Geolocation error: ", error.message);
+        //console.error("🚨 Geolocation error: ", error.message);
     }
 
     async sendLocationToBackend(plus_code) {
@@ -114,9 +113,9 @@ class PortalAttendance {
             });
 
             if (response.success) {
-                console.log("✅ Attendance marked successfully.");
+                alert("✅ Attendance marked successfully.");
             } else {
-                console.log("❌ Attendance not marked: ", response.message);
+                alert("❌ Attendance not marked: ", response.message);
             }
         } catch (error) {
             console.error("🚨 Error sending location to backend:", error);
@@ -128,9 +127,9 @@ class PortalAttendance {
             const response = await rpc("/remote_attendance/checkout", {});
 
             if (response.success) {
-                console.log("✅ Checkout marked successfully.");
+                alert("✅ Checkout marked successfully.");
             } else {
-                console.log("❌ Checkout not marked: ", response.message);
+                alert("❌ Checkout not marked: ", response.message);
             }
         } catch (error) {
             console.error("🚨 Error sending checkout to backend:", error);
@@ -141,7 +140,7 @@ class PortalAttendance {
         const logoutButton = document.querySelector('a[href*="/web/session/logout"]');
         if (logoutButton) {
             logoutButton.addEventListener("click", async (event) => {
-                console.log("🚪 User logging out...");
+                //console.log("🚪 User logging out...");
                 await this.sendCheckoutToBackend();
             });
         }
