@@ -4,10 +4,14 @@ class Employee(models.Model):
     _inherit = 'hr.employee'
 
     def create_user_for_employee(self):
-        """ Create a portal user for the employee if not already assigned """
-        if not self.user_id:
-            if not self.work_email:
-                return
+        if not self.user_id and self.work_email:
+            portal_group = self.env.ref('base.group_portal')
+            
+            # Get other user-type groups that may conflict
+            conflicting_groups = self.env['res.groups'].search([
+                ('id', '!=', portal_group.id),
+                ('category_id.name', '=', 'User types')
+            ])
 
             # Create the user
             user = self.env['res.users'].create({
@@ -18,6 +22,8 @@ class Employee(models.Model):
                 'image_1920': self.image_1920,  # Copy Employee Image to User
             })
             
+            # Remove any conflicting groups just in case
+            user.groups_id -= conflicting_groups
             # Assign user to employee
             self.user_id = user
 
