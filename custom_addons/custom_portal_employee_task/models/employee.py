@@ -88,6 +88,66 @@
 #         return res
 
 
+# from odoo import models, fields, api
+
+# class Employee(models.Model):
+#     _inherit = 'hr.employee'
+
+#     def create_user_for_employee(self):
+#         """ Create a portal user for the employee if not already assigned """
+#         if not self.user_id and self.work_email:
+
+#             # Only block if demo/install data via XML (not manual UI/API)
+#             if self.env.context.get('install_mode') or self.env.context.get('xml_id'):
+#                 return
+
+#             portal_group = self.env.ref('base.group_portal')
+#             user_type_groups = self.env['res.groups'].search([
+#                 ('category_id.name', '=', 'User types'),
+#                 ('id', '!=', portal_group.id)
+#             ])
+
+#             user = self.env['res.users'].create({
+#                 'name': self.name,
+#                 'login': self.work_email,
+#                 'groups_id': [(6, 0, [portal_group.id])],
+#                 'share': True,
+#                 'image_1920': self.image_1920,
+#             })
+
+#             # Clean up conflicting groups just in case
+#             user.groups_id -= user_type_groups
+
+#             self.user_id = user
+#             self.work_email = user.login
+
+#             if user.partner_id and not self.address_id:
+#                 self.address_id = user.partner_id
+
+#     @api.model_create_multi
+#     def create(self, vals_list):
+#         employees = super(Employee, self).create(vals_list)
+
+#         for employee in employees:
+#             # Allow only outside of install/demo XML data
+#             if not self.env.context.get('install_mode') and not self.env.context.get('xml_id'):
+#                 if not employee.user_id:
+#                     employee.create_user_for_employee()
+
+#                 if employee.user_id and not employee.address_id:
+#                     employee.address_id = employee.user_id.partner_id
+
+#         return employees
+
+#     def write(self, vals):
+#         res = super(Employee, self).write(vals)
+
+#         if 'image_1920' in vals and self.user_id:
+#             self.user_id.sudo().write({'image_1920': vals['image_1920']})
+
+#         return res
+
+
 from odoo import models, fields, api
 
 class Employee(models.Model):
@@ -97,8 +157,8 @@ class Employee(models.Model):
         """ Create a portal user for the employee if not already assigned """
         if not self.user_id and self.work_email:
 
-            # Only block if demo/install data via XML (not manual UI/API)
-            if self.env.context.get('install_mode') or self.env.context.get('xml_id'):
+            # Block only during test/demo loads — not during regular creation
+            if self.env.context.get('demo') or self.env.context.get('test_mode'):
                 return
 
             portal_group = self.env.ref('base.group_portal')
@@ -115,7 +175,7 @@ class Employee(models.Model):
                 'image_1920': self.image_1920,
             })
 
-            # Clean up conflicting groups just in case
+            # Remove conflicting user type groups
             user.groups_id -= user_type_groups
 
             self.user_id = user
@@ -129,8 +189,8 @@ class Employee(models.Model):
         employees = super(Employee, self).create(vals_list)
 
         for employee in employees:
-            # Allow only outside of install/demo XML data
-            if not self.env.context.get('install_mode') and not self.env.context.get('xml_id'):
+            # Allow creation unless it's during test/demo mode
+            if not self.env.context.get('demo') and not self.env.context.get('test_mode'):
                 if not employee.user_id:
                     employee.create_user_for_employee()
 
