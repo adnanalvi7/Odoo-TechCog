@@ -15,8 +15,9 @@
         'views/zkteco_attendance_views.xml',
         'data/ir_cron_data.xml',
     ],
-    
     'installable': True,
+    'application': True,
+    'auto_install': True,
   
   
 }
